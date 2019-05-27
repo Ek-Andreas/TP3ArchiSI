@@ -3,7 +3,7 @@ import os
 import sys, os
 sys.path.append("/src")
 from model import model
-
+from model.model import saver
 print(os.getcwd())
 
 from flask import *
@@ -19,15 +19,11 @@ def f_data():
     date = request.form.get('date')
     section = request.form.get('section')
     if title and author and date and section is not None:
-        try:
-            saver(title, author, date, section)
-            return
-        except:
-            print("database error")
+        saver(title, author, date, section)
     else:
-        print("error")
+        return render_template('add_book.html')
+    return home_query()
 
-    return
 
 if __name__ == '__main__':
     app.run()

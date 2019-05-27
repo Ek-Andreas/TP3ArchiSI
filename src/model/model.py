@@ -12,11 +12,14 @@ cursor = mariadb_connection.cursor(buffered=True)
 
 
 def saver(title, author, date, section):
-    sql = "INSERT INTO books (title, author, date, section) VALUES (%s, %s, %s, %s)"
+    sql = "INSERT INTO books (title,author,date,section) VALUES (%s, %s, %s, %s)"
     val = (title, author, date, section)
-    cursor.execute(sql, val)
+    try:
+        cursor.execute(sql, val)
+    except mariadb.Error as error:
+        print("Error: {}".format(error))
     print(sql)
-    mariadb.commit()
+    mariadb_connection.commit()
     return True
 
 
