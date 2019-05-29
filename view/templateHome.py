@@ -5,7 +5,12 @@ def get_template():
     <title>The World News</title>
 </head>
     <body>
-        <table>
+    <br>
+    <form action="/searchBooks" method="post">
+        <input type="text" name="value">
+        <input type="submit" value="Search">
+    </form>
+    <table>
         <tr>
             <td>title</td><td>author</td><td>date</td><td>section</td>
              % for row in rows:
