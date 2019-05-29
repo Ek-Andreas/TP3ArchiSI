@@ -1,6 +1,7 @@
 def get_template():
     template = """
 <html>
+
 <head>
     <title>Search for a book</title>
 </head>

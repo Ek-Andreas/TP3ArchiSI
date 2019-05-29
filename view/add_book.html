@@ -14,17 +14,31 @@
         <br>Title
         <br><input type="text" name="title">
         <br>Date<input type="text" name="date">
-        <br>Section<input type="text" name="section">
+        <br>Section
+    <select name="section">
+          <option value="fantasy">Fantasy</option>
+          <option value="historical">Historical</option>
+          <option value="fiction">Fiction</option>
+          <option value="science-fiction">Science-fiction</option>
+    </select>
     <div class="container">
         <div class="header">
 
         </div>
-
-        <input type="submit" value="Submit">
+        <input type="radio" name="status" value="in edition"> In edition
+        <input type="radio" name="status" value="submitted"> Submitted
+        <input type="radio" name="status" value="accepted"> Accepted
+        <input type="radio" name="status" value="published"> Published
     </div>
+    <div>
+        <br>Text
+        <input type="text" name="summary">
+
+    </div>
+            <input type="submit" value="Submit">
+
         </form>
         <footer class="footer">
-            <p>andreas</p>
         </footer>
 
     </div>

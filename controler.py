@@ -16,9 +16,12 @@ def f_data():
     title = request.form.get('title')
     author = request.form.get('author')
     date = request.form.get('date')
+    status = request.form.get('status')
     section = request.form.get('section')
-    if title and author and date and section is not None:
-        saver(title, author, date, section)
+    summary = request.form.get('summary')
+
+    if title and author and date and status and section is not None:
+        saver(title, author, date, section, status, summary)
     else:
         return render_template('add_book.html')
     return home_query()
@@ -32,7 +35,7 @@ def home_query():
     import view.templateHome
     from mako.template import Template
     from model.model import cursor
-    cursor.execute("SELECT DISTINCT title, author, date, section FROM books")
+    cursor.execute("SELECT DISTINCT  author, section, status, date, title FROM books")
     rows = [list(i) for i in cursor.fetchall()]
     template = view.templateHome.get_template()
     html = (Template(template).render(rows=rows))

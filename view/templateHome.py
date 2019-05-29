@@ -1,12 +1,14 @@
 def get_template():
     template = """
 <html>
+
 <head>
     <title>The World News</title>
 </head>
     <body>
     <br>
-    <form action="/searchBooks" method="post">
+    <button onclick="location.href = '/addBooks';" id="myButton" class="float-left submit-button" >New</button>
+<form action="/searchBooks" method="post">
         <input type="text" name="value">
         <input type="submit" value="Search">
     </form>
@@ -22,8 +24,7 @@ def get_template():
              </tr>
              % endfor
         </table>
-        <button onclick="location.href = '/addBooks';" id="myButton" class="float-left submit-button" >Add Books</button>
-
+        
     </body>
 </html>"""
     return template
