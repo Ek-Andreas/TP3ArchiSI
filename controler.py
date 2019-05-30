@@ -23,7 +23,7 @@ def f_data():
     if title and author and date and status and section is not None:
         saver(title, author, date, section, status, summary)
     else:
-        return render_template('add_book.html')
+        return render_template('add_article.html')
     return home_query()
 
 
@@ -35,7 +35,7 @@ def home_query():
     import view.templateHome
     from mako.template import Template
     from model.model import cursor
-    cursor.execute("SELECT DISTINCT  author, section, status, date, title FROM books")
+    cursor.execute("SELECT DISTINCT  author, section, status, date, title FROM articles")
     rows = [list(i) for i in cursor.fetchall()]
     template = view.templateHome.get_template()
     html = (Template(template).render(rows=rows))
@@ -47,22 +47,24 @@ def main():
     return home_query()
 
 
-@app.route('/addBooks')
+@app.route('/add')
 def add():
-    return render_template('add_book.html')
+    return render_template('add_article.html')
 
 
-@app.route("/searchBooks/", methods=['POST', 'GET'])
+@app.route("/search/", methods=['POST', 'GET'])
 def search():
     value = request.form.get('value')
-    return search(value)
+    if value is not None:
+        return search(value)
+    return home_query()
 
 
 def search(value):
     import view.templateSearch
     from mako.template import Template
     from model.model import cursor
-    query = "SELECT DISTINCT title, author, date, section FROM books WHERE title = '" + value +"'"
+    query = "SELECT DISTINCT author, section, status, date, title FROM articles WHERE title = '" + value + "' OR author = '" + value + "'"
     print(query)
     cursor.execute(query)
     rows = [list(i) for i in cursor.fetchall()]
